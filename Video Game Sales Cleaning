@@ -64,7 +64,7 @@ FROM vgsales
 
 
 
--- After I created a table to put the cleaned and standardized data 
+-- I then created a table to put the cleaned and standardized data 
 SELECT 
 	Rank,
 	Name,
