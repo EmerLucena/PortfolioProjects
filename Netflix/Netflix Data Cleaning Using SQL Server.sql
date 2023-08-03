@@ -132,21 +132,22 @@ ADD og_country varchar(100);
 
 UPDATE netflix
 SET og_country =CASE
-					WHEN CHARINDEX(',', country) > 0 THEN LEFT(country, CHARINDEX(',', country) - 1)
-					ELSE country
-				END;
+			WHEN CHARINDEX(',', country) > 0 THEN LEFT(country, CHARINDEX(',', country) - 1)
+			ELSE country
+		END;
+
 -- 3 records returned blanks becuase there is no entries after the delimiter in those records. Therefore, I will update them manually.
 SELECT *
 FROM netflix_og
 WHERE show_id IN ('s194', 's366', 's372');
 
 UPDATE netflix
-SET country =CASE	
-				WHEN show_id = 's194' THEN 'South Korea'
-				WHEN show_id = 's366' THEN 'France'
-				WHEN show_id = 's372' THEN 'France'
-				ELSE country
-			 END;
+SET country =CASE
+		WHEN show_id = 's194' THEN 'South Korea'
+		WHEN show_id = 's366' THEN 'France'
+		WHEN show_id = 's372' THEN 'France'
+		ELSE country
+	     END;
 
 
 -- Deleting the country column that has multiple entries
