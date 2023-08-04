@@ -1,7 +1,6 @@
 -- View Dataset
 SELECT *
-FROM netflix
-WHERE cast = 'Anitta';
+FROM netflix;
 
 
 -- Checking duplicates in the unique key (show_id)
