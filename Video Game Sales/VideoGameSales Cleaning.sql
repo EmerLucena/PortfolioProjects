@@ -1,3 +1,28 @@
+-- The rank colum is the unique id for the dataset, so we are going to check for duplicates
+SELECT Rank, COUNT(*)
+FROM vgsalesraw
+GROUP BY Rank
+ORDER BY Rank DESC;
+-- No duplicates
+
+
+-- Checking Null values in every the columns 
+SELECT 
+	SUM(CASE WHEN Rank IS NULL THEN 1 ELSE 0 END) AS Rank_Null,
+	SUM(CASE WHEN Name IS NULL THEN 1 ELSE 0 END) AS Name_Null,
+	SUM(CASE WHEN Platform IS NULL THEN 1 ELSE 0 END) AS Platform_Null,
+	SUM(CASE WHEN Year IS NULL THEN 1 ELSE 0 END) AS Year_Null,
+	SUM(CASE WHEN Publisher IS NULL THEN 1 ELSE 0 END) AS Publisher_Null
+FROM vgsalesraw;
+/*
+	Rank_Null = 0 
+	Name_Null = 0
+	Platform_Null = 0
+	Year_Null = 271
+	Publisher_Null = 0
+*/
+
+
 /*Since the year column with null values has only 1.6% of the data and manualy searching for the release date of every game will take too long
 I decided to just delete the records with null year. But I will first make a back up table of the raw data. */
 SELECT *
