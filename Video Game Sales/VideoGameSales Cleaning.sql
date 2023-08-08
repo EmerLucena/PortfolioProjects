@@ -1,6 +1,6 @@
 -- The rank colum is the unique id for the dataset, so we are going to check for duplicates
 SELECT Rank, COUNT(*)
-FROM vgsalesraw
+FROM vgsales
 GROUP BY Rank
 ORDER BY Rank DESC;
 -- No duplicates
@@ -13,7 +13,7 @@ SELECT
 	SUM(CASE WHEN Platform IS NULL THEN 1 ELSE 0 END) AS Platform_Null,
 	SUM(CASE WHEN Year IS NULL THEN 1 ELSE 0 END) AS Year_Null,
 	SUM(CASE WHEN Publisher IS NULL THEN 1 ELSE 0 END) AS Publisher_Null
-FROM vgsalesraw;
+FROM vgsales;
 /*
 	Rank_Null = 0 
 	Name_Null = 0
@@ -27,13 +27,13 @@ FROM vgsalesraw;
 I decided to just delete the records with null year. But I will first make a back up table of the raw data. */
 SELECT *
 INTO vgsales_bckup
-FROM vgsalesraw;
+FROM vgsales;
 
-DELETE FROM vgsalesraw
+DELETE FROM vgsales
 WHERE Year IS NULL;
 
 SELECT Year
-FROM vgsalesraw
+FROM vgsales
 WHERE Year IS NULL;
 
 
@@ -51,7 +51,7 @@ SELECT
 	JP_Sales * 1000000 AS JP_Sales,
 	Other_Sales * 1000000 AS Other_Sales,
 	Global_Sales * 1000000 AS Global_Sales
-FROM vgsalesraw;
+FROM vgsales;
 
 
 
@@ -69,7 +69,7 @@ SELECT
 	Other_Sales * 1000000 AS Other_Sales,
 	Global_Sales * 1000000 AS Global_Sales
 INTO vgsalescleaned
-FROM vgsalesraw;
+FROM vgsales;
 
 SELECT *
 FROM vgsalescleaned;
