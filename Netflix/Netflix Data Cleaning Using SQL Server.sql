@@ -114,7 +114,7 @@ DROP COLUMN cast, description;
 
 
 /* 
-Some of the records in country column has multiple countries, since I only need one for visualization purposes. 
+Some of the records in country column has multiple countries, since I only need one for visualization purposes
 I will only get the first country in the country column assuming that's the original country of the movie.
 */
 SELECT 
