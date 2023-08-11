@@ -9,8 +9,8 @@ SELECT *
 FROM xboxsales;
 
 
--- There are columns in some tables that are not existing in other columns
--- Deleting columns in vgsales2022 and xboxsales that other tables deos not have
+-- There are columns in some tables that are not existing in other tables.
+-- Deleting columns in vgsales2022 and xboxsales that other tables do not have
 
 ALTER TABLE vgsales2022
 DROP COLUMN Critic_Score, Critic_Count, User_Score, Developer, Rating, User_Count;
@@ -25,7 +25,7 @@ ADD Platform varchar(50);
 UPDATE ps4sales
 SET Platform = 'PS4';
 
--- Since there are 3 xbox platform (X360, XB and XOne) I will use the release year of other games to know what xbox platform they belong.
+-- Since there are 3 xbox platform (X360, XB, and XOne) I will use the release year of other games to know what xbox platform they belong to.
 SELECT Platform, MIN(Year_of_Release) as min, MAX(Year_of_Release) as max
 FROM vgsales2022
 WHERE Platform LIKE 'x%'
@@ -53,7 +53,7 @@ UNION
 SELECT *
 FROM xboxsales;
 
--- Create new table
+-- Create a new table
 SELECT *
 INTO vgsales
 FROM (SELECT *
@@ -78,7 +78,7 @@ GROUP BY
 HAVING COUNT(*) > 1;
 -- No duplicate
 
--- Checking Null values in every the columns 
+-- Checking Null values in every the column. 
 SELECT 
 	SUM(CASE WHEN Name IS NULL THEN 1 ELSE 0 END) AS Name_Null,
 	SUM(CASE WHEN Platform IS NULL THEN 1 ELSE 0 END) AS Platform_Null,
@@ -97,19 +97,19 @@ FROM vgsales;
 -- Publisher_Null = 317
 
 
--- Deleting records with null values but I will make a back up table of the vgsales data.
+-- Deleting records with null values but I will make a backup table of the vgsales data.
 SELECT *
 INTO vgsales_bckup
 FROM vgsales;
 
 DELETE FROM vgsales
 WHERE 
-	'Name' IS NULL 
+	Name IS NULL 
 	OR Year_of_Release IS NULL
 	OR Genre IS NULL
 	OR Publisher IS NULL
 
--- Detecting outliers in global sales. Calculate to determine the treshold for outliers.
+-- Detecting outliers in global sales. Calculate to determine the threshold for outliers.
 -- Data points with sales greater than this threshold are considered outliers.
 SELECT Name, Global_Sales
 FROM vgsales
@@ -129,7 +129,7 @@ ALTER TABLE vgsales ALTER COLUMN Global_Sales DECIMAL(10,2);
 SELECT 
 	Name, 
 	Global_Sales,
-    (NA_Sales + EU_Sales + JP_Sales + Other_Sales) AS total_region_sales
+    	(NA_Sales + EU_Sales + JP_Sales + Other_Sales) AS total_region_sales
 FROM vgsales
 WHERE (NA_Sales + EU_Sales + JP_Sales + Other_Sales) <> Global_Sales;
 
