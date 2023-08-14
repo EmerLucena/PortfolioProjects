@@ -1,4 +1,4 @@
--- View dataset
+-- View datas-- View dataset
 SELECT *
 FROM vgsales;
 
@@ -8,6 +8,11 @@ SELECT
 	COUNT(DISTINCT Name) AS Unique_games, 
 	COUNT(DISTINCT Platform) AS Unique_platforms
 FROM vgsales;
+
+-- TOP 10 Games that generated the most sales
+SELECT TOP(10) Name, Global_Sales
+FROM vgsales
+ORDER BY Global_Sales DESC;
 
 -- Checking the min and max global sales, and average and total global sales
 SELECT 
@@ -32,6 +37,7 @@ FROM vgsales
 GROUP BY Year_of_Release
 ORDER BY Year_of_Release;
 
+
 -- Analyzing the distribution of games across different platforms and genres.
 SELECT 
 	Platform, 
@@ -47,6 +53,22 @@ FROM vgsales
 GROUP BY Genre
 ORDER BY num_games DESC;
 
+-- Checking the Platform Life Cycle
+SELECT 
+	Platform, 
+	MIN(Year_of_Release) AS Release_year, 
+	MAX(Year_of_Release) AS Discontinuation_year
+FROM vgsales
+GROUP BY Platform
+ORDER BY Release_Year;
+
+-- Analyzing the inlfuence of Console Generations
+SELECT Year_of_Release, Platform, SUM(Global_Sales) AS Total_Sales
+FROM vgsales
+GROUP BY Year_of_Release, Platform
+ORDER BY Year_of_Release;
+
+
 -- Global Sales By Genre
 SELECT
 	Genre,
@@ -58,23 +80,19 @@ ORDER BY Global_Sales DESC;
 -- Global Sales By Publisher
 SELECT
 	Publisher,
+	COUNT(*) AS Total_Games,
 	ROUND(SUM(Global_Sales),2) AS Global_Sales
 FROM vgsales
 GROUP BY Publisher
 ORDER BY Global_Sales DESC;
 
 
--- TOP 10 Games that generated the most sales
-SELECT TOP(10) Name, Global_Sales
-FROM vgsales
-ORDER BY Global_Sales DESC;
-
 -- Analyzing regional sales data.
 SELECT 
-		SUM(NA_Sales) AS Total_na_sales, 
-		SUM(EU_Sales) AS Total_eu_sales,
-		SUM(JP_Sales) AS Total_jp_sales, 
-		SUM(Other_Sales) AS Total_other_sales
+		SUM(NA_Sales) AS Total_NA_Sales, 
+		SUM(EU_Sales) AS Total_EU_Sales,
+		SUM(JP_Sales) AS Total_JP_Sales, 
+		SUM(Other_Sales) AS Total_Other_Sales
 FROM vgsales;
 
 -- Analyzing the average sales of NA, JP, EU and other regions/countries
