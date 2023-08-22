@@ -45,7 +45,7 @@ duration = 3
 UPDATE netflix  
 SET director = nf2.director
 FROM netflix
-JOIN netflix nf2
+JOIN netflix AS nf2
 ON netflix.cast = nf2.cast
 WHERE netflix.cast = nf2.cast AND netflix.show_id <> nf2.show_id AND netflix.director IS NULL;
 -- 131 records are populated
@@ -60,7 +60,7 @@ WHERE director IS NULL;
 UPDATE netflix  
 SET country = nf2.country
 FROM netflix
-JOIN netflix nf2
+JOIN netflix AS nf2
 ON netflix.director = nf2.director
 WHERE netflix.director = nf2.director AND netflix.show_id <> nf2.show_id AND netflix.country IS NULL;
 -- 611 rows are now populated
