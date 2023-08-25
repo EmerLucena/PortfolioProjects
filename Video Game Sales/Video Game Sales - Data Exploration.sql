@@ -1,4 +1,4 @@
--- View datas-- View dataset
+-- View dataset
 SELECT *
 FROM vgsales;
 
