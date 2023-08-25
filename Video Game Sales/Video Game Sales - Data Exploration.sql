@@ -14,7 +14,7 @@ SELECT TOP(10) Name, Global_Sales
 FROM vgsales
 ORDER BY Global_Sales DESC;
 
--- Checking the min and max global sales, and average and total global sales
+-- Checking the min and max global sales,average and total global sales
 SELECT 
 	MIN(Global_Sales) AS Min_global_sales,
 	MAX(Global_Sales) AS Max_global_sales,
